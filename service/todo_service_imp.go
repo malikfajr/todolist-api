@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
+	"malikfajr/todolist-api/exception"
 	"malikfajr/todolist-api/helper"
 	"malikfajr/todolist-api/model/domain"
 	"malikfajr/todolist-api/model/web"
@@ -45,7 +46,9 @@ func (service *TodoServiceImp) Delete(ctx context.Context, todoId int) {
 	defer helper.CommitOrRollback(tx)
 
 	todo, err := service.TodoRepository.FindById(ctx, tx, todoId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.TodoRepository.Delete(ctx, tx, todo.ID)
 }
@@ -73,7 +76,9 @@ func (service *TodoServiceImp) FindById(ctx context.Context, todoId int) web.Tod
 	defer helper.CommitOrRollback(tx)
 
 	todo, err := service.TodoRepository.FindById(ctx, tx, todoId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToTodoResponse(todo)
 }
@@ -81,14 +86,18 @@ func (service *TodoServiceImp) FindById(ctx context.Context, todoId int) web.Tod
 // Update implements TodoService.
 func (service *TodoServiceImp) Update(ctx context.Context, request web.TodoUpdateRequest) web.TodoResponse {
 	err := service.Validate.Struct(request)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(err)
+	}
 
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
 	todo, err := service.TodoRepository.FindById(ctx, tx, request.ID)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	todo.Title = request.Title
 	todo.Description = request.Description

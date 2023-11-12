@@ -20,8 +20,11 @@ func (controller *TodoControllerImp) Create(w http.ResponseWriter, r *http.Reque
 	decoder := json.NewDecoder(r.Body)
 
 	todo := web.TodoCreateRequest{}
-	err := decoder.Decode(&todo)
-	helper.PanicIfError(err)
+
+	if r.Body != nil {
+		err := decoder.Decode(&todo)
+		helper.PanicIfError(err)
+	}
 
 	todoResponse := controller.TodoService.Create(r.Context(), todo)
 	webResponse := web.WebResponse{
@@ -33,7 +36,7 @@ func (controller *TodoControllerImp) Create(w http.ResponseWriter, r *http.Reque
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
-	err = json.NewEncoder(w).Encode(webResponse)
+	err := json.NewEncoder(w).Encode(webResponse)
 	helper.PanicIfError(err)
 }
 
@@ -103,8 +106,11 @@ func (controller *TodoControllerImp) Update(w http.ResponseWriter, r *http.Reque
 	decoder := json.NewDecoder(r.Body)
 
 	todo := web.TodoUpdateRequest{}
-	err := decoder.Decode(&todo)
-	helper.PanicIfError(err)
+
+	if r.Body != nil {
+		err := decoder.Decode(&todo)
+		helper.PanicIfError(err)
+	}
 
 	id := params["todoId"]
 	todoId, err := strconv.ParseInt(id, 10, 64)

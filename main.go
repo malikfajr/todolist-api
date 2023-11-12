@@ -1,8 +1,9 @@
 package main
 
 import (
+	"malikfajr/todolist-api/app"
 	"malikfajr/todolist-api/controller"
-	"malikfajr/todolist-api/helper"
+	"malikfajr/todolist-api/exception"
 	"malikfajr/todolist-api/repository"
 	"malikfajr/todolist-api/service"
 	"net/http"
@@ -23,7 +24,7 @@ func main() {
 }
 
 func Routes() http.Handler {
-	db := helper.NewDb()
+	db := app.NewDb()
 
 	validate := validator.New()
 	todoRepository := repository.NewTodoRepositoryImp()
@@ -36,11 +37,14 @@ func Routes() http.Handler {
 		w.Write([]byte("Hello World"))
 	}).Methods("GET")
 
-	router.HandleFunc("/todos", todoController.FindAll).Methods("GET")
-	router.HandleFunc("/todos", todoController.Create).Methods("POST")
-	router.HandleFunc("/todos/{todoId}", todoController.FindById).Methods("GET")
-	router.HandleFunc("/todos/{todoId}", todoController.Update).Methods("PUT")
-	router.HandleFunc("/todos/{todoId}", todoController.Delete).Methods("DELETE")
+	routerV1 := router.PathPrefix("/api/").Subrouter()
+	routerV1.HandleFunc("/todos", todoController.FindAll).Methods("GET")
+	routerV1.HandleFunc("/todos", todoController.Create).Methods("POST")
+	routerV1.HandleFunc("/todos/{todoId}", todoController.FindById).Methods("GET")
+	routerV1.HandleFunc("/todos/{todoId}", todoController.Update).Methods("PUT")
+	routerV1.HandleFunc("/todos/{todoId}", todoController.Delete).Methods("DELETE")
+
+	router.Use(exception.ErrorHandler)
 
 	return router
 }
