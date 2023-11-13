@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/malikfajr/todolist-api/exception"
 	"github.com/malikfajr/todolist-api/helper"
 	"github.com/malikfajr/todolist-api/model/web"
 	"github.com/malikfajr/todolist-api/service"
@@ -47,7 +48,9 @@ func (controller *TodoControllerImp) Delete(w http.ResponseWriter, r *http.Reque
 
 	id := params["todoId"]
 	todoId, err := strconv.ParseInt(id, 10, 64)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError("Todo not found"))
+	}
 
 	controller.TodoService.Delete(r.Context(), int(todoId))
 	webResponse := web.WebResponse{
@@ -85,7 +88,9 @@ func (controller *TodoControllerImp) FindById(w http.ResponseWriter, r *http.Req
 
 	id := params["todoId"]
 	todoId, err := strconv.ParseInt(id, 10, 64)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError("Todo not found"))
+	}
 
 	todo := controller.TodoService.FindById(r.Context(), int(todoId))
 	webResponse := web.WebResponse{
@@ -115,7 +120,9 @@ func (controller *TodoControllerImp) Update(w http.ResponseWriter, r *http.Reque
 
 	id := params["todoId"]
 	todoId, err := strconv.ParseInt(id, 10, 64)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError("Todo not found"))
+	}
 
 	todo.ID = int(todoId)
 
