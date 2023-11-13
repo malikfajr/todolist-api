@@ -3,11 +3,12 @@ package service
 import (
 	"context"
 	"database/sql"
-	"malikfajr/todolist-api/exception"
-	"malikfajr/todolist-api/helper"
-	"malikfajr/todolist-api/model/domain"
-	"malikfajr/todolist-api/model/web"
-	"malikfajr/todolist-api/repository"
+
+	"github.com/malikfajr/todolist-api/exception"
+	"github.com/malikfajr/todolist-api/helper"
+	"github.com/malikfajr/todolist-api/model/domain"
+	"github.com/malikfajr/todolist-api/model/web"
+	"github.com/malikfajr/todolist-api/repository"
 
 	"github.com/go-playground/validator/v10"
 )

@@ -1,12 +1,13 @@
 package main
 
 import (
-	"malikfajr/todolist-api/app"
-	"malikfajr/todolist-api/controller"
-	"malikfajr/todolist-api/exception"
-	"malikfajr/todolist-api/repository"
-	"malikfajr/todolist-api/service"
 	"net/http"
+
+	"github.com/malikfajr/todolist-api/app"
+	"github.com/malikfajr/todolist-api/controller"
+	"github.com/malikfajr/todolist-api/exception"
+	"github.com/malikfajr/todolist-api/repository"
+	"github.com/malikfajr/todolist-api/service"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"

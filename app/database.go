@@ -3,7 +3,8 @@ package app
 import (
 	"database/sql"
 	"fmt"
-	"malikfajr/todolist-api/helper"
+
+	"github.com/malikfajr/todolist-api/helper"
 
 	_ "github.com/lib/pq"
 )

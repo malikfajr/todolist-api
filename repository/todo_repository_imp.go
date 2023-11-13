@@ -4,8 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"malikfajr/todolist-api/helper"
-	"malikfajr/todolist-api/model/domain"
+
+	"github.com/malikfajr/todolist-api/helper"
+	"github.com/malikfajr/todolist-api/model/domain"
 )
 
 type TodoRepositoryImp struct {

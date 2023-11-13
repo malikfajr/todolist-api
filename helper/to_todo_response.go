@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"malikfajr/todolist-api/model/domain"
-	"malikfajr/todolist-api/model/web"
+	"github.com/malikfajr/todolist-api/model/domain"
+	"github.com/malikfajr/todolist-api/model/web"
 )
 
 func ToTodoResponse(todo domain.Todo) web.TodoResponse {

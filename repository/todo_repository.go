@@ -3,7 +3,8 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"malikfajr/todolist-api/model/domain"
+
+	"github.com/malikfajr/todolist-api/model/domain"
 )
 
 type TodoRepository interface {

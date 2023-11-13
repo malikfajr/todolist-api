@@ -2,11 +2,12 @@ package controller
 
 import (
 	"encoding/json"
-	"malikfajr/todolist-api/helper"
-	"malikfajr/todolist-api/model/web"
-	"malikfajr/todolist-api/service"
 	"net/http"
 	"strconv"
+
+	"github.com/malikfajr/todolist-api/helper"
+	"github.com/malikfajr/todolist-api/model/web"
+	"github.com/malikfajr/todolist-api/service"
 
 	"github.com/gorilla/mux"
 )

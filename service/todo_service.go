@@ -2,7 +2,8 @@ package service
 
 import (
 	"context"
-	"malikfajr/todolist-api/model/web"
+
+	"github.com/malikfajr/todolist-api/model/web"
 )
 
 type TodoService interface {

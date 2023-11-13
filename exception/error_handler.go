@@ -2,9 +2,10 @@ package exception
 
 import (
 	"encoding/json"
-	"malikfajr/todolist-api/helper"
-	"malikfajr/todolist-api/model/web"
 	"net/http"
+
+	"github.com/malikfajr/todolist-api/helper"
+	"github.com/malikfajr/todolist-api/model/web"
 
 	"github.com/go-playground/validator/v10"
 )
